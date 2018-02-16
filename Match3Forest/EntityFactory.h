@@ -1,7 +1,19 @@
 #ifndef ENTITYFACTORY_H
 #define ENTITYFACTORY_H
 #include"Entity.h"
-class EntityFactory
+
+
+
+class IEntityFactory
+{
+public:
+	IEntityFactory();
+	~IEntityFactory();
+};
+
+
+
+class EntityFactory : public IEntityFactory
 {
 public:
 	EntityFactory();

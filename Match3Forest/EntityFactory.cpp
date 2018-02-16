@@ -2,13 +2,13 @@
 
 
 
-EntityFactory::EntityFactory()
+IEntityFactory::IEntityFactory()
 {
 
 }
 
 
-EntityFactory::~EntityFactory()
+IEntityFactory::~IEntityFactory()
 {
 
 }
