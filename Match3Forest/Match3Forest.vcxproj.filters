@@ -29,6 +29,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GemNode.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,6 +48,11 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="SceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GemNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
