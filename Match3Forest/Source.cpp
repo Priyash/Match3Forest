@@ -11,18 +11,31 @@ int main()
 
 	EntityManager* entityManager = new EntityManager();
 
+
+	//LOGIC PART
 	IEntity* gameObject1 = entityManager->CreateEntity("GameOBject1", "../../../../Assets/Sprites/Cupcake@2x.png");
 	IEntity* gameObject2 = entityManager->CreateEntity("GameOBject2", "../../../../Assets/Sprites/Croissant-Highlighted@2x.png");
 	
+	//gameObject1->setPosition(100, 300);
+
+
+	//RENDERING PART
 	SceneNode* rootNode = new SceneNode();
 
-
 	GemNode* gem = new GemNode();
+	gem->setNodePosition(300, 100);
 	gem->attachObject(gameObject1);
-	gem->setNodePosition(500, 100);
+
+	GemNode* gem2 = new GemNode();
+	gem2->setNodePosition(300, 30);
+	gem2->attachObject(gameObject2);
+
+
 	unique_ptr<GemNode>gemNode(gem);
+	unique_ptr<GemNode>gemNode2(gem2);
 
 	rootNode->addChildNode(move(gemNode));
+	rootNode->addChildNode(move(gemNode2));
 
 	while (window.isOpen())
 	{

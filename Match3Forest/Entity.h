@@ -13,7 +13,6 @@ public:
 	~IEntity();
 
 	virtual sf::Sprite getInstance() = 0;
-	virtual void setPosition(float x, float y) = 0;
 };
 
 
@@ -26,7 +25,6 @@ public:
 	Entity(string entityName, string file);
 	~Entity();
 	sf::Sprite getInstance();
-	void setPosition(float x, float y);
 };
 
 

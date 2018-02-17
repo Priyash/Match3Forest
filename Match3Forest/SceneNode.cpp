@@ -69,82 +69,6 @@ void SceneNode::dettachObject(int id)
 	}
 }
 
-void SceneNode::setNodePosition(float x, float y)
-{	
-	this->posx = x;
-	this->posy = y;
-
-	if (!entities.empty())
-	{
-		for (auto& i : entities)
-		{
-			//i.second->getInstance().setPosition(posx, posy);
-			i.second->setPosition(x,y);
-		}
-	}
-}
-
-void SceneNode::setNodeRotation(float angle)
-{
-	this->angle = angle;
-	if (!entities.empty())
-	{
-		for (auto& i : entities)
-		{
-			i.second->getInstance().setRotation(angle);
-		}
-	}
-}
-
-void SceneNode::setNodeScale(float x,float y)
-{
-	this->scalex = x;
-	this->scaley = y;
-	if (!entities.empty())
-	{
-		for (auto& i : entities)
-		{
-			i.second->getInstance().setScale(x, y);
-		}
-	}
-}
-
-
-void SceneNode::move(float x, float y)
-{
-	if (!entities.empty())
-	{
-		for (auto& i : entities)
-		{
-			i.second->getInstance().move(x, y);
-		}
-	}
-}
-
-
-sf::Vector2<float> SceneNode::getNodePos()
-{
-	sf::Vector2<float> pos;
-	pos.x = posx;
-	pos.y = pos.y;
-	return pos;
-}
-
-
-float SceneNode::getNodeRotation()
-{
-	return angle;
-}
-
-sf::Vector2<float> SceneNode::getNodeScale()
-{
-	sf::Vector2<float>node_scale;
-	node_scale.x = scalex;
-	node_scale.y = scaley;
-
-	return node_scale;
-}
-
 //====================================UPDATE-RELATED-METHODS=================================================================
 
 void SceneNode::update(sf::Time dt)
@@ -166,11 +90,22 @@ void SceneNode::updateChildren(sf::Time dt)
 	}
 }
 
+void SceneNode::setNodePosition(float x, float y)
+{
+	this->posx = x;
+	this->posy = y;
+}
+
+sf::Vector2f SceneNode::getNodePosition()
+{
+	return sf::Vector2f(posx, posy);
+}
 //=================================================DRAW-RELATED-METHODS==========================================
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
-	states.transform *= getTransform();
+	auto trans = getTransform();
+	states.transform *= trans;
 	drawCurrent(target, states);
 	drawChildren(target, states);
 }
