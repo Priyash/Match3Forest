@@ -14,8 +14,8 @@ public:
 
 	IEntity* CreateEntity(string entityName, string file);
 	IEntity* find(string entityName);
+	void update_entity(string entity_id, IEntity* update_entity);
 	void RemoveEntity(string entityName);
-private:
 	void add(string,IEntity*);
 };
 

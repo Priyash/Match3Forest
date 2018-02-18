@@ -17,7 +17,7 @@ SceneNode::~SceneNode()
 }
 
 //====================================SCENENODE-RELATED-METHODS==============================================================
-void SceneNode::addChildNode(unique_ptr<SceneNode>childNode)
+void SceneNode::addChildNode(SceneNode* childNode)
 {
 	childNode->parent = this;
 	children.push_back(std::move(childNode));
@@ -25,28 +25,36 @@ void SceneNode::addChildNode(unique_ptr<SceneNode>childNode)
 
 void SceneNode::removeChildNode(SceneNode& childNode)
 {
-	auto found = find_if(children.begin(), children.end(), [&](unique_ptr<SceneNode>&node)->bool {return node.get() == &childNode; });
+	auto found = find_if(children.begin(), children.end(), [&](SceneNode* node)->bool {return node == &childNode; });
 	if (found != children.end())
 	{
 		(*found)->parent = nullptr;
-		children.erase(remove_if(children.begin(), children.end(), [&](unique_ptr<SceneNode>&n2)->bool {return (*found).get() == n2.get(); }), children.end());
+		children.erase(remove_if(children.begin(), children.end(), [&](SceneNode* n2)->bool {return *found == n2; }), children.end());
 	}
 }
 
 
 SceneNode* SceneNode::findNode(SceneNode& node)
 {
-	auto itr = find_if(children.begin(), children.end(), [&](unique_ptr<SceneNode>& node2)->bool {return &node == node2.get(); });
+	auto itr = find_if(children.begin(), children.end(), [&](SceneNode* node2)->bool {return &node == node2; });
 	if (itr != children.end())
 	{
 		//unique_ptr<SceneNode>temp = std::move(*itr);
-		return itr->get();
+		return *itr;
 	}
 
 	return nullptr;
 }
 
+SceneNode* SceneNode::getNodeParent()
+{
+	return parent;
+}
 
+vector<SceneNode*>SceneNode::getNodeChildren()
+{
+	return children;
+}
 
 //====================================ENTITY-RELATED-METHODS=================================================================
 
@@ -94,6 +102,10 @@ void SceneNode::setNodePosition(float x, float y)
 {
 	this->posx = x;
 	this->posy = y;
+	for (auto i : entities)
+	{
+		i.second->setEntityPosition(posx, posy);
+	}
 }
 
 sf::Vector2f SceneNode::getNodePosition()
@@ -104,8 +116,7 @@ sf::Vector2f SceneNode::getNodePosition()
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
-	auto trans = getTransform();
-	states.transform *= trans;
+	states.transform *= getTransform();
 	drawCurrent(target, states);
 	drawChildren(target, states);
 }

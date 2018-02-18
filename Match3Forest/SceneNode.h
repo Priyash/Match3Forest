@@ -13,7 +13,7 @@ class SceneNode : public sf::Drawable, sf::Transformable, sf::NonCopyable
 {
 
 protected:
-	vector<unique_ptr<SceneNode>>children;
+	vector<SceneNode*>children;
 	SceneNode* parent;
 	map<int, IEntity*>entities;
 	int object_index;
@@ -34,9 +34,13 @@ public:
 	void setNodePosition(float x, float y);
 	sf::Vector2f getNodePosition();
 	//METHODS FOR ADDING OR SEARCHING OR REMOVING A NODE FROM A SCENENODE
-	void addChildNode(unique_ptr<SceneNode>);
+	void addChildNode(SceneNode*);
 	void removeChildNode(SceneNode&);
 	SceneNode* findNode(SceneNode&);
+
+	//PARENT CHILD METHODS
+	SceneNode* getNodeParent();
+	vector<SceneNode*>getNodeChildren();
 
 	
 

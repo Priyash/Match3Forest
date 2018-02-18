@@ -18,7 +18,6 @@ void GemNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states)cons
 {
 	for (auto& i : entities)
 	{
-		states.transform.translate(posx,posy);
 		target.draw(i.second->getInstance(), states);
 	}
 }

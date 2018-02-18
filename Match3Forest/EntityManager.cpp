@@ -64,3 +64,18 @@ void EntityManager::RemoveEntity(string entity_id)
 		return;
 	}
 }
+
+
+void EntityManager::update_entity(string entity_id,IEntity* update_entity)
+{
+	auto update_itr = entity_list.find(entity_id);
+	if (update_itr != entity_list.end())
+	{
+		update_itr->second = update_entity;
+		int k = 0;
+	}
+	else
+	{
+		return;
+	}
+}
