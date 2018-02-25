@@ -76,17 +76,17 @@ void Entity::setEntityScale(float x, float y)
 
 sf::Vector2f Entity::getEntityPosition()
 {
-	return sf::Vector2f(posx, posy);
+	return sprite.getPosition();
 }
 
 float Entity::getEntityRotation()
 {
 
-	return angle;
+	return sprite.getRotation();
 }
 sf::Vector2f Entity::getEntityScale()
 {
-	return sf::Vector2f(scalex, scaley);
+	return sprite.getScale();
 }
 
 

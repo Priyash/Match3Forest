@@ -2,8 +2,18 @@
 #include<Windows.h>
 #include"EntityManager.h"
 #include"GemNode.h"
+
+#include "Game.h"
+
 int main()
 {
+
+
+	Game* game = new Game();
+	game->play();
+
+
+
 	sf::RenderWindow window(sf::VideoMode(800, 500), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);

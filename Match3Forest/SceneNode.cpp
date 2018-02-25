@@ -110,7 +110,8 @@ void SceneNode::setNodePosition(float x, float y)
 
 sf::Vector2f SceneNode::getNodePosition()
 {
-	return sf::Vector2f(posx, posy);
+
+	return entities[0]->getEntityPosition();
 }
 //=================================================DRAW-RELATED-METHODS==========================================
 

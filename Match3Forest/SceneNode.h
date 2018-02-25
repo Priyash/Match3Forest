@@ -16,6 +16,7 @@ protected:
 	vector<SceneNode*>children;
 	SceneNode* parent;
 	map<int, IEntity*>entities;
+	IEntity* entity;
 	int object_index;
 	float posx, posy;
 	float angle;
