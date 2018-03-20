@@ -13,6 +13,9 @@
     <Filter Include="GameApp">
       <UniqueIdentifier>{415e583a-20b4-4541-acd0-a9d4cf9d7bca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{fa3fd416-4998-493c-bf8d-4ec0238c70e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp">
@@ -45,6 +48,9 @@
     <ClCompile Include="GameStart.cpp">
       <Filter>GameApp</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>GameApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
