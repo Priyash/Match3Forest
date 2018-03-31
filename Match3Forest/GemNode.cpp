@@ -22,7 +22,7 @@ void GemNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states)cons
 	}
 }
 
-void GemNode::updateCurrent(sf::Time dt)
+void GemNode::updateCurrent()
 {
 
 }

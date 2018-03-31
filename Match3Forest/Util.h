@@ -40,10 +40,12 @@ public:
 class UtilManager
 {
 	map<string, IUtil*>util_list;
-
-public:
 	UtilManager();
+	static UtilManager* instance;
+public:
 	~UtilManager();
+
+	static UtilManager* getInstance();
 
 	IUtil* createUtilObject(string);
 	void add(IUtil*);

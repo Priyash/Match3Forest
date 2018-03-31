@@ -15,7 +15,9 @@ SceneManager::~SceneManager()
 
 IScene* SceneManager::CreateScene(string scene_name)
 {
-	return sceneFactory->createScene(scene_name);
+	ISceneFactory* sceneFactory = new SceneFactory();
+	IScene* scene = sceneFactory->createScene(scene_name);
+	return scene;
 }
 
 void SceneManager::addScene(IScene* scene)
@@ -58,6 +60,44 @@ void SceneManager::play(sf::RenderWindow& stage)
 	{
 		IScene* scene = scene_list.begin()->second;
 
-		//PENDING WILL DO THE SCENE LOAD , UNLOAD , UPDATE , RENDER METHOD WITH MAIN GAME LOOP WITH TIME
+		sf::Event event;
+		while (stage.pollEvent(event))
+		{
+			if (!handle_global_event(event)) {
+				scene->handleEvent(event);
+			}
+		}
+		
+		//CLEAR THE SCREEN BEFORE RENDERING ANYTHING
+		stage.clear();
+
+		//LOAD THE SCENE DATA
+		scene->load();
+
+		//UPDATE THE RENDERING CURRENT SCREEN
+		scene->update();
+
+		//RENDER THE CURRENT SCENE
+		scene->render(stage);
+
+		//DISPLAY THE SCENE TO THE WINDOW
+		stage.display();
+	}
+
+
+	//CLOSE THE RENDERING WINDOW
+	stage.close();
+}
+
+
+
+bool SceneManager::handle_global_event(sf::Event& evt)
+{
+	switch (evt.type) {
+		case sf::Event::Closed:
+			m_end_play = true;
+			return true;
+		default:
+			return false;
 	}
 }

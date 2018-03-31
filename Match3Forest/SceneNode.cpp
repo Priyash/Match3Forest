@@ -79,22 +79,22 @@ void SceneNode::dettachObject(int id)
 
 //====================================UPDATE-RELATED-METHODS=================================================================
 
-void SceneNode::update(sf::Time dt)
+void SceneNode::update()
 {
-	updateCurrent(dt);
-	updateChildren(dt);
+	updateCurrent();
+	updateChildren();
 }
 
-void SceneNode::updateCurrent(sf::Time dt)
+void SceneNode::updateCurrent()
 {
 	//EMPTY BASE CLASS METHOD
 }
 
-void SceneNode::updateChildren(sf::Time dt)
+void SceneNode::updateChildren()
 {
 	for (auto& i : children)
 	{
-		i->update(dt);
+		i->update();
 	}
 }
 

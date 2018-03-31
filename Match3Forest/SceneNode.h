@@ -26,7 +26,7 @@ public:
 	~SceneNode();
 
 	//UPDATE METHOD FOR UPDATING THE GAME OBJECTS
-	void update(sf::Time dt);
+	void update();
 
 	//ATTACH METHODS FOR ATTACHING OR DETTACHING THE ENTITY OBJECTS
 	void attachObject(IEntity*);
@@ -47,11 +47,11 @@ public:
 
 private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states)const;
-	virtual void updateCurrent(sf::Time dt);
+	virtual void updateCurrent();
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states)const;
 
-	void updateChildren(sf::Time dt);
+	void updateChildren();
 	void drawChildren(sf::RenderTarget& target, sf::RenderStates states)const;
 	
 

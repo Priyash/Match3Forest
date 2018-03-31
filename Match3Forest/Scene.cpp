@@ -4,6 +4,7 @@
 
 IScene::IScene()
 {
+
 }
 
 
@@ -16,6 +17,10 @@ IScene::~IScene()
 Scene::Scene(string scene_name)
 {
 	this->scene_name = scene_name;
+	entityManager = new EntityManager();
+	rootNode = new SceneNode();
+	gemNode = new GemNode();
+
 }
 
 
@@ -32,15 +37,23 @@ string Scene::get_scene_name()
 
 void Scene::load()
 {
-
+	gameObject1 = entityManager->CreateEntity("GameOBject1", "../../../../Assets/Sprites/Forest/start bg.png");
+	gemNode->attachObject(gameObject1);
+	rootNode->addChildNode(gemNode);
 }
 
 void Scene::render(sf::RenderWindow& stage)
 {
+	stage.draw(*rootNode);
+}
+
+void Scene::update()
+{
 
 }
 
-void Scene::update(sf::Time dt)
+
+void Scene::handleEvent(sf::Event& event)
 {
 
 }

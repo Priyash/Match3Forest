@@ -5,7 +5,7 @@
 class SceneManager
 {
 	map<string, IScene*>scene_list;
-	ISceneFactory* sceneFactory;
+	
 	bool m_end_play;
 public:
 	SceneManager();
@@ -15,6 +15,7 @@ public:
 	IScene* get_Scene(string scene_name);
 	void removeScene(string scene_name);
 	void play(sf::RenderWindow& stage);
+	bool handle_global_event(sf::Event& evt);
 };
 
 

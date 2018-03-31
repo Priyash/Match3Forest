@@ -12,11 +12,12 @@ public:
 };
 
 
-class SceneFactory
+class SceneFactory : public ISceneFactory
 {
+
+public:
 	SceneFactory();
 	~SceneFactory();
-
 	IScene* createScene(string scene_name);
 };
 

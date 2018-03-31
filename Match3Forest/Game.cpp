@@ -4,7 +4,7 @@
 
 Game::Game()
 {
-	renderer  = new sf::RenderWindow(sf::VideoMode(640, 480), "Forest Game");
+	renderer  = new sf::RenderWindow(sf::VideoMode(2000, 1024), "Forest Game");
 	sceneManager = new SceneManager();
 }
 

@@ -1,5 +1,6 @@
 #include "Util.h"
 
+UtilManager* UtilManager::instance = nullptr;
 
 
 Utility::Utility(string name)
@@ -48,6 +49,16 @@ UtilManager::~UtilManager()
 
 }
 
+
+UtilManager* UtilManager::getInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new UtilManager();
+	}
+
+	return instance;
+}
 
 IUtil* UtilManager::createUtilObject(string util_object_name)
 {
