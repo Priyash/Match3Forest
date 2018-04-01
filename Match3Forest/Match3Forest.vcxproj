@@ -149,8 +149,9 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GemNode.cpp" />
+    <ClCompile Include="ForestNode.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -162,8 +163,9 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="EventListener.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GemNode.h" />
+    <ClInclude Include="ForestNode.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />

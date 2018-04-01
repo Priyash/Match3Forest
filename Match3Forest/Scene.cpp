@@ -17,10 +17,12 @@ IScene::~IScene()
 Scene::Scene(string scene_name)
 {
 	this->scene_name = scene_name;
+
 	entityManager = new EntityManager();
 	rootNode = new SceneNode();
-	gemNode = new GemNode();
 
+	backgroundNode = new ForestNode();
+	appleNode = new ForestNode();
 }
 
 
@@ -37,19 +39,28 @@ string Scene::get_scene_name()
 
 void Scene::load()
 {
-	gameObject1 = entityManager->CreateEntity("GameOBject1", "../../../../Assets/Sprites/Forest/start bg.png");
-	gemNode->attachObject(gameObject1);
-	rootNode->addChildNode(gemNode);
+	backgroundEntity = entityManager->CreateEntity("GameOBject1", "../../../../Assets/BG/bg.jpg");
+	backgroundNode->attachEntity(backgroundEntity);
+
+	appleEntity = entityManager->CreateEntity("GameOBject2", "../../../../Assets/Sprites/Forest/slice05_05 (2).png");
+	appleNode->attachEntity(appleEntity);
+	appleNode->setNodePosition(400, 100);
+
+
+	rootNode->addChildNode(backgroundNode);
+	rootNode->addChildNode(appleNode);
+
 }
 
 void Scene::render(sf::RenderWindow& stage)
 {
+	//stage.setMouseCursorVisible(false);
 	stage.draw(*rootNode);
 }
 
-void Scene::update()
+void Scene::update(sf::Time dt)
 {
-
+	rootNode->update(dt);
 }
 
 

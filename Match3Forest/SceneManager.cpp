@@ -1,10 +1,11 @@
 #include "SceneManager.h"
 
-
+const sf::Time timePerFrame = sf::seconds(1 / 60.0f);
 
 SceneManager::SceneManager()
 {
 	m_end_play = false;
+	//listener = new KeyBoardListener();
 }
 
 
@@ -56,32 +57,41 @@ void SceneManager::removeScene(string scene_name)
 
 void SceneManager::play(sf::RenderWindow& stage)
 {
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
 	while (!m_end_play)
 	{
-		IScene* scene = scene_list.begin()->second;
-
-		sf::Event event;
-		while (stage.pollEvent(event))
+		sf::Time elapsedTime = clock.restart();
+		timeSinceLastUpdate += elapsedTime;
+		while (timeSinceLastUpdate > timePerFrame)
 		{
-			if (!handle_global_event(event)) {
-				scene->handleEvent(event);
+			if (m_end_play == true)break;
+			IScene* scene = scene_list.begin()->second;
+			sf::Event event;
+			while (stage.pollEvent(event))
+			{
+				if (!handle_global_event(event)) {
+					scene->handleEvent(event);
+				}
 			}
+
+			//CLEAR THE SCREEN BEFORE RENDERING ANYTHING
+			stage.clear();
+
+			//LOAD THE SCENE DATA
+			scene->load();
+
+			//UPDATE THE RENDERING CURRENT SCREEN
+			scene->update(timePerFrame);
+
+			//RENDER THE CURRENT SCENE
+			scene->render(stage);
+
+			//DISPLAY THE SCENE TO THE WINDOW
+			stage.display();
 		}
-		
-		//CLEAR THE SCREEN BEFORE RENDERING ANYTHING
-		stage.clear();
 
-		//LOAD THE SCENE DATA
-		scene->load();
-
-		//UPDATE THE RENDERING CURRENT SCREEN
-		scene->update();
-
-		//RENDER THE CURRENT SCENE
-		scene->render(stage);
-
-		//DISPLAY THE SCENE TO THE WINDOW
-		stage.display();
 	}
 
 
@@ -90,13 +100,22 @@ void SceneManager::play(sf::RenderWindow& stage)
 }
 
 
-
 bool SceneManager::handle_global_event(sf::Event& evt)
 {
 	switch (evt.type) {
 		case sf::Event::Closed:
 			m_end_play = true;
 			return true;
+		case sf::Event::KeyPressed:
+		{
+			if (evt.key.code == sf::Keyboard::Escape)
+			{
+				m_end_play = true;
+			}
+			//function<void(sf::Event& event,bool result)>callback_listener = listener->updateListener;
+			//callback_listener(evt,m_end_play);
+			return true;
+		}
 		default:
 			return false;
 	}

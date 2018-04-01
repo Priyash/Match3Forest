@@ -4,16 +4,15 @@
 
 SceneNode::SceneNode()
 {
-	object_index = 0;
+
 }
 
 
 SceneNode::~SceneNode()
 {
-	entities.clear();
+	
 	parent = nullptr;
 	children.clear();
-	object_index = 0;
 }
 
 //====================================SCENENODE-RELATED-METHODS==============================================================
@@ -58,61 +57,29 @@ vector<SceneNode*>SceneNode::getNodeChildren()
 
 //====================================ENTITY-RELATED-METHODS=================================================================
 
-void SceneNode::attachObject(IEntity* entity)
-{
-	entities[object_index] = entity;
-	object_index = object_index + 1;
-}
-
-void SceneNode::dettachObject(int id)
-{
-	auto object_found_itr = entities.find(id);
-	if (object_found_itr != entities.end())
-	{
-		entities.erase(object_found_itr);
-	}
-	else
-	{
-		return;
-	}
-}
 
 //====================================UPDATE-RELATED-METHODS=================================================================
 
-void SceneNode::update()
+void SceneNode::update(sf::Time dt)
 {
-	updateCurrent();
-	updateChildren();
+	updateCurrent(dt);
+	updateChildren(dt);
 }
 
-void SceneNode::updateCurrent()
+void SceneNode::updateCurrent(sf::Time dt)
 {
 	//EMPTY BASE CLASS METHOD
 }
 
-void SceneNode::updateChildren()
+void SceneNode::updateChildren(sf::Time dt)
 {
 	for (auto& i : children)
 	{
-		i->update();
+		i->update(dt);
 	}
 }
 
-void SceneNode::setNodePosition(float x, float y)
-{
-	this->posx = x;
-	this->posy = y;
-	for (auto i : entities)
-	{
-		i.second->setEntityPosition(posx, posy);
-	}
-}
 
-sf::Vector2f SceneNode::getNodePosition()
-{
-
-	return entities[0]->getEntityPosition();
-}
 //=================================================DRAW-RELATED-METHODS==========================================
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states)const

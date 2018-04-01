@@ -1,11 +1,13 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 #include"SceneFactory.h"
+#include"EventListener.h"
+#include <functional>
 
 class SceneManager
 {
 	map<string, IScene*>scene_list;
-	
+	//IEventListener* listener;
 	bool m_end_play;
 public:
 	SceneManager();

@@ -16,6 +16,9 @@
     <Filter Include="Utility">
       <UniqueIdentifier>{fa3fd416-4998-493c-bf8d-4ec0238c70e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{72d74c39-7afb-48d7-b77f-4b6aaa22709a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp">
@@ -28,9 +31,6 @@
       <Filter>Entity</Filter>
     </ClCompile>
     <ClCompile Include="SceneNode.cpp">
-      <Filter>Node</Filter>
-    </ClCompile>
-    <ClCompile Include="GemNode.cpp">
       <Filter>Node</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
@@ -51,6 +51,12 @@
     <ClCompile Include="Util.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="EventListener.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="ForestNode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -63,9 +69,6 @@
       <Filter>Entity</Filter>
     </ClInclude>
     <ClInclude Include="SceneNode.h">
-      <Filter>Node</Filter>
-    </ClInclude>
-    <ClInclude Include="GemNode.h">
       <Filter>Node</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
@@ -82,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="ForestNode.h">
+      <Filter>Node</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

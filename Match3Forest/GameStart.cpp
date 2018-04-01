@@ -1,8 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include<Windows.h>
 #include"EntityManager.h"
-#include"GemNode.h"
-
 #include "Game.h"
 
 int main()

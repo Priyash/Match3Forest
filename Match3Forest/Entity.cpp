@@ -17,15 +17,10 @@ IEntity::~IEntity()
 
 Entity::Entity(string entityName , string file)
 {
-	texture.loadFromFile(file);
-	texture.setSmooth(true);
-	sprite.setTexture(texture);
+	spriteTexture.loadFromFile(file);
+	spriteTexture.setSmooth(true);
+	sprite.setTexture(spriteTexture);
 	this->entityName = entityName;
-	posx = 0.0f;
-	posy = 0.0f;
-	angle = 0.0f;
-	scalex = 0.0f;
-	scalex = 0.0f;
 
 }
 
@@ -34,11 +29,6 @@ Entity::~Entity()
 
 }
 
-
-sf::Sprite Entity::getInstance()
-{
-	return sprite;
-}
 
 string Entity::getName()
 {
@@ -51,42 +41,7 @@ void Entity::setName(string name)
 	this->entityName = name;
 }
 
-
-void Entity::setEntityPosition(float x, float y)
+sf::Sprite& Entity::getSpriteInstance()
 {
-	this->posx = x;
-	this->posy = y;
-
-	sprite.setPosition(posx, posy);
+	return sprite;
 }
-
-void Entity::setEntityRotation(float angle)
-{
-	this->angle = angle;
-	sprite.setRotation(angle);
-}
-
-void Entity::setEntityScale(float x, float y)
-{
-	this->scalex = x;
-	this->scaley = y;
-	sprite.setScale(scalex, scaley);
-}
-
-
-sf::Vector2f Entity::getEntityPosition()
-{
-	return sprite.getPosition();
-}
-
-float Entity::getEntityRotation()
-{
-
-	return sprite.getRotation();
-}
-sf::Vector2f Entity::getEntityScale()
-{
-	return sprite.getScale();
-}
-
-
