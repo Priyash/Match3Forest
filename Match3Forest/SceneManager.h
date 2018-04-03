@@ -3,12 +3,27 @@
 #include"SceneFactory.h"
 #include"EventListener.h"
 #include <functional>
+#include"EventListener.h"
 
+//==========================================================CUSTOM_USER_DEFINED_LISTENER_CLASSES===========================================
+class KeyBoardListener : public IListener
+{
+
+public:
+	KeyBoardListener();
+	~KeyBoardListener();
+	void onNotify(sf::Event& evt) override;
+
+};
+
+
+//===============================================================SCENE_MANAGER_CLASS============================================
 class SceneManager
 {
 	map<string, IScene*>scene_list;
 	//IEventListener* listener;
 	bool m_end_play;
+	
 public:
 	SceneManager();
 	~SceneManager();

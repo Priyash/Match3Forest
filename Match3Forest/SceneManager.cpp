@@ -2,6 +2,28 @@
 
 const sf::Time timePerFrame = sf::seconds(1 / 60.0f);
 
+//=============================================LISTENER_CLASS======================================================================
+
+
+KeyBoardListener::KeyBoardListener()
+{
+
+}
+
+KeyBoardListener::~KeyBoardListener()
+{
+
+}
+
+void KeyBoardListener::onNotify(sf::Event& evt)
+{
+	string s = "Keyboard Event recieved";
+	int k = 0;
+}
+
+//===================================================================================================================================
+//======================================================MANAGER_CLASS========================================================
+//===================================================================================================================================
 SceneManager::SceneManager()
 {
 	m_end_play = false;
@@ -108,8 +130,11 @@ bool SceneManager::handle_global_event(sf::Event& evt)
 			return true;
 		case sf::Event::KeyPressed:
 		{
+			EventManager::getInstance()->subscribe_listener(EVENT::KEYBOARD_PRESSED, new KeyBoardListener());
+			
 			if (evt.key.code == sf::Keyboard::Escape)
 			{
+				EventManager::getInstance()->notifyListener(EVENT::KEYBOARD_PRESSED, evt);
 				m_end_play = true;
 			}
 			//function<void(sf::Event& event,bool result)>callback_listener = listener->updateListener;
