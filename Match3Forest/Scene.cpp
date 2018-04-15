@@ -10,6 +10,7 @@ IScene::IScene()
 
 IScene::~IScene()
 {
+
 }
 
 //=================================================SCENE_CLASS_STARTED====================================================
@@ -23,6 +24,8 @@ Scene::Scene(string scene_name)
 
 	backgroundNode = new ForestNode();
 	appleNode = new ForestNode();
+	cursorNode = new ForestNode();
+
 }
 
 
@@ -46,9 +49,13 @@ void Scene::load()
 	appleNode->attachEntity(appleEntity);
 	appleNode->setNodePosition(400, 100);
 
+	cursorEntity = entityManager->CreateEntity("Game_Cursor", "../../../../Assets/Sprites/forest_cursor - Copy.png");
+	cursorNode->attachEntity(cursorEntity);
+	
 
 	rootNode->addChildNode(backgroundNode);
-	rootNode->addChildNode(appleNode);
+	rootNode->addChildNode(cursorNode);
+	//rootNode->addChildNode(appleNode);
 
 }
 

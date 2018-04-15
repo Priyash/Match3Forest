@@ -75,7 +75,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>F:\Game Projects\Forest\Engine\SFML-2.4.2\include;F:\Game Projects\Forest\Game Code\Src\Match3Forest\Match3Forest\rapidjson\include;$(IncludePath)</IncludePath>
-    <OutDir>..\..\..\..\Bin</OutDir>
+    <OutDir>..\..\..\..\Bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

@@ -10,10 +10,15 @@ void ForestNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states)c
 void ForestNode::updateCurrent(sf::Time dt)
 {
 	float posx = entity->getSpriteInstance().getPosition().x;
-	float speedX = 800.0f;
-	posx += speedX*dt.asSeconds();
+	//float speedX = 800.0f;
+	//posx += speedX*dt.asSeconds();
 
-	entity->getSpriteInstance().setPosition(posx, 400);
+	//entity->getSpriteInstance().setPosition(posx, 400);
+
+	if (entity->getName() == "Game_Cursor")
+	{
+		entity->getSpriteInstance().setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition()));
+	}
 }
 
 

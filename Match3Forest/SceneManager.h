@@ -21,8 +21,7 @@ public:
 class SceneManager
 {
 	map<string, IScene*>scene_list;
-	//IEventListener* listener;
-	bool m_end_play;
+	
 	
 public:
 	SceneManager();
@@ -32,7 +31,7 @@ public:
 	IScene* get_Scene(string scene_name);
 	void removeScene(string scene_name);
 	void play(sf::RenderWindow& stage);
-	bool handle_global_event(sf::Event& evt);
+	bool handle_global_event(sf::Event& evt, sf::RenderWindow& stage);
 };
 
 

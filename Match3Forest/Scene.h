@@ -27,15 +27,18 @@ class Scene : public IScene
 
 	EntityManager* entityManager;
 	SceneNode* rootNode;
-
-
-
+	
+	//FOR BACKGROUND SCENE
 	IEntity* backgroundEntity;
 	AbstractForestNode* backgroundNode;
-
-
+	
+	//FOR GAME_OBJECT SCENE
 	IEntity* appleEntity;
 	AbstractForestNode* appleNode;
+
+	//SPRITE_CURSOR
+	IEntity* cursorEntity;
+	AbstractForestNode* cursorNode;
 
 
 public:
