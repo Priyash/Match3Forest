@@ -32,14 +32,19 @@ class Scene : public IScene
 	IEntity* backgroundEntity;
 	AbstractForestNode* backgroundNode;
 	
-	//FOR GAME_OBJECT SCENE
-	IEntity* appleEntity;
-	AbstractForestNode* appleNode;
 
 	//SPRITE_CURSOR
 	IEntity* cursorEntity;
 	AbstractForestNode* cursorNode;
 
+
+	//GAME_BOARD
+	IEntity* gameBoardEntity;
+	AbstractForestNode* gameBoardNode;
+
+	//GAME_HEADER
+	IEntity* gameScoreHeaderEntity;
+	AbstractForestNode* gameScoreHeaderNode;
 
 public:
 	Scene(string scene_name);

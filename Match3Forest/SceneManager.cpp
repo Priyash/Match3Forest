@@ -91,18 +91,30 @@ void SceneManager::play(sf::RenderWindow& stage)
 {
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
 	stage.setMouseCursorVisible(false);
+
+	//GET THE SCENE FROM THE LIST OF SCENES
+	IScene* scene = scene_list.begin()->second;
+
+	//CLEAR THE SCREEN BEFORE RENDERING ANYTHING
+	stage.clear();
+
+	//LOAD THE SCENE DATA[ONE_TIME]
+	scene->load();
+
+	//MAIN GAME LOOP
 	while (!m_end_play)
 	{
-		
 		sf::Time elapsedTime = clock.restart();
 		timeSinceLastUpdate += elapsedTime;
+
 		while (timeSinceLastUpdate > timePerFrame)
 		{
 			timeSinceLastUpdate -= timePerFrame;
 
 			if (m_end_play == true)break;
-			IScene* scene = scene_list.begin()->second;
+			
 			sf::Event event;
 			while (stage.pollEvent(event))
 			{
@@ -110,12 +122,6 @@ void SceneManager::play(sf::RenderWindow& stage)
 					scene->handleEvent(event);
 				}
 			}
-
-			//CLEAR THE SCREEN BEFORE RENDERING ANYTHING
-			stage.clear();
-
-			//LOAD THE SCENE DATA
-			scene->load();
 
 			//UPDATE THE RENDERING CURRENT SCREEN
 			scene->update(timePerFrame);
@@ -125,6 +131,9 @@ void SceneManager::play(sf::RenderWindow& stage)
 
 			//DISPLAY THE SCENE TO THE WINDOW
 			stage.display();
+
+			//TODO : SCENE SWITCH METHOD WILL BE CALLED LATER ON 
+
 		}
 
 	}

@@ -7,6 +7,39 @@ void ForestNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states)c
 }
 
 
+void ForestNode::setNodePosition(float x, float y)
+{
+	entity->getSpriteInstance().setPosition(x, y);
+
+}
+
+sf::Vector2f ForestNode::getNodePosition()
+{
+	return entity->getSpriteInstance().getPosition();
+}
+
+void ForestNode::setNodeScale(float x, float y)
+{
+	entity->getSpriteInstance().setScale(x, y);
+}
+
+sf::Vector2f ForestNode::getNodeScale()
+{
+	return entity->getSpriteInstance().getScale();
+}
+
+
+void ForestNode::setNodeOrigin(float x, float y)
+{
+	entity->getSpriteInstance().setOrigin(x, y);
+}
+sf::Vector2f ForestNode::getNodeOrigin()
+{
+	return entity->getSpriteInstance().getOrigin();
+}
+
+
+
 void ForestNode::updateCurrent(sf::Time dt)
 {
 	float posx = entity->getSpriteInstance().getPosition().x;
