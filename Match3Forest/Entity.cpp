@@ -17,9 +17,9 @@ IEntity::~IEntity()
 
 Entity::Entity(string entityName , string file)
 {
-	spriteTexture.loadFromFile(file);
-	spriteTexture.setSmooth(true);
+	spriteTexture.loadFromFile(file);	
 	sprite.setTexture(spriteTexture);
+	spriteTexture.setSmooth(true);
 	this->entityName = entityName;
 
 }

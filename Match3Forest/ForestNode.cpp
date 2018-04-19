@@ -31,7 +31,7 @@ sf::Vector2f ForestNode::getNodeScale()
 
 void ForestNode::setNodeOrigin(float x, float y)
 {
-	entity->getSpriteInstance().setOrigin(x, y);
+	entity->getSpriteInstance().setOrigin(x,y);
 }
 sf::Vector2f ForestNode::getNodeOrigin()
 {
