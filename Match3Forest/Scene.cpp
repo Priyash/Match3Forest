@@ -22,6 +22,9 @@ Scene::Scene(string scene_name)
 	BOARD_WIDTH = 5;
 	BOARD_HEIGHT = 6;
 
+	xOffset = 10;
+	yOffset = 5;
+
 	grid = vector<vector<int>>(BOARD_HEIGHT, vector<int>(BOARD_WIDTH));
 
 
@@ -44,6 +47,8 @@ Scene::Scene(string scene_name)
 	rainbowPowerUpNode = new ForestNode();
 
 	shopNode = new ForestNode();
+
+	activeBlockNode = new ForestNode();
 }
 
 
@@ -96,23 +101,141 @@ bool Scene::checkVertical(int i, int j)
 	return false;
 }
 
-
-void Scene::buildGameBoard()
+AbstractForestNode* Scene::createCoconut(AbstractForestNode* containerNode, int i , int j)
 {
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Coconut", "../../../../Assets/Sprites/Forest/slice01_01 (3).png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset , containerNode->getNodePosition().y + yOffset + 5);
+	fruitNode->setNodeScale(0.4, 0.4);
+	return fruitNode;
+}
+
+AbstractForestNode* Scene::createApple(AbstractForestNode* containerNode, int i, int j)
+{
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Apple", "../../../../Assets/Sprites/Forest/slice05_05 (2).png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset, containerNode->getNodePosition().y + yOffset);
+	fruitNode->setNodeScale(0.4, 0.4);
+	return fruitNode;
+}
+
+AbstractForestNode* Scene::createBerry(AbstractForestNode* containerNode, int i, int j)
+{
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Berry", "../../../../Assets/Sprites/Forest/slice03_03 (3).png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset, containerNode->getNodePosition().y + yOffset);
+	fruitNode->setNodeScale(0.4, 0.4);
+	return fruitNode;
+}
+
+AbstractForestNode* Scene::createClover(AbstractForestNode* containerNode, int i, int j)
+{
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Clover", "../../../../Assets/Sprites/Forest/slice06_06 (2).png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset, containerNode->getNodePosition().y + yOffset);
+	fruitNode->setNodeScale(0.4, 0.4);
+	return fruitNode;
+}
+
+
+AbstractForestNode* Scene::createGrape(AbstractForestNode* containerNode, int i, int j)
+{
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Grape", "../../../../Assets/Sprites/Forest/slice04_04 (3).png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset, containerNode->getNodePosition().y + yOffset );
+	fruitNode->setNodeScale(0.4, 0.4);
+	return fruitNode;
+}
+
+
+AbstractForestNode* Scene::createMushroom(AbstractForestNode* containerNode, int i, int j)
+{
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Mushroom", "../../../../Assets/Sprites/Forest/slice02_02 (3).png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset - 5, containerNode->getNodePosition().y + yOffset);
+	fruitNode->setNodeScale(0.4, 0.4);
+
+	return fruitNode;
+}
+
+AbstractForestNode* Scene::createStrawberry(AbstractForestNode* containerNode, int i, int j)
+{
+	IEntity* fruitEntity = entityManager->CreateEntity("Fruit_Strawberry_" + to_string(i) + "_" + to_string(j), "../../../../Assets/Sprites/Forest/strawberry.png");
+	AbstractForestNode* fruitNode = new ForestNode();
+	fruitNode->attachEntity(fruitEntity);
+	fruitNode->setNodePosition(containerNode->getNodePosition().x + xOffset, containerNode->getNodePosition().y);
+	fruitNode->setNodeScale(0.4, 0.4);
+	return fruitNode;
+}
+
+
+AbstractForestNode* Scene::getFruitList(AbstractForestNode* containerNode,int i ,int j , int fruitIndex)
+{
+	AbstractForestNode* fruitNode;
+	switch (fruitIndex)
+	{
+		case FRUIT_TYPE::COCONUT:
+			fruitNode = createCoconut(containerNode, i, j);
+			break;
+		case FRUIT_TYPE::APPLE:
+			fruitNode = createApple(containerNode, i, j);
+			break;
+		case FRUIT_TYPE::BERRY:
+			fruitNode = createBerry(containerNode, i, j);
+			break;
+		case FRUIT_TYPE::CLOVER:
+			fruitNode = createClover(containerNode, i, j);
+			break;
+		case FRUIT_TYPE::GRAPE:
+			fruitNode = createGrape(containerNode, i, j);
+			break;
+		case FRUIT_TYPE::MUSHROOM:
+			fruitNode = createMushroom(containerNode, i, j);
+			break;
+		case FRUIT_TYPE::STRAWBERRY:
+			fruitNode = createStrawberry(containerNode, i, j);
+			break;
+	}
+
+
+	return fruitNode;
+}
+
+int Scene::getIndex(int i, int j)
+{
+	int index = (i*BOARD_WIDTH) + j;
+	return index;
+}
+
+vector<AbstractForestNode*> Scene::populateFruits(vector<AbstractForestNode*>containerList)
+{
+	vector<AbstractForestNode*>fruitList;
 	for (int i = 0; i < BOARD_HEIGHT; i++)
 	{
 		for (int j = 0; j < BOARD_WIDTH; j++)
 		{
+			int containerListIndex = getIndex(i, j);
+			AbstractForestNode* containerNode = containerList[containerListIndex];
+
+			fruitList.push_back(getFruitList(containerNode, i, j, grid[i][j]));
 
 		}
 	}
+
+	return fruitList;
 }
 
 
 vector<AbstractForestNode*> Scene::buildContainerCell(AbstractForestNode* boardNode)
 {
 	int xOffset = 74;
-	int yOffset = 74;
+	int yOffset = 76;
 	vector<AbstractForestNode*>containerList;
 	for (int i = 0; i < 6; i++)
 	{
@@ -207,7 +330,14 @@ void Scene::load()
 	shopNode->setNodePosition(powerUpRainbowContainerNode->getNodePosition().x + 90, powerUpRainbowContainerNode->getNodePosition().y + 5);
 	shopNode->setNodeScale(0.32, 0.32);
 
-	vector<AbstractForestNode*>containerList = buildContainerCell(gameBoardNode);
+	//POPULATION OF THE CONTAINER CELL 
+	containerList = buildContainerCell(gameBoardNode);
+	//POPULATION OF THE FRUITS IN THE CONTAINER CELL
+	fruitList = populateFruits(containerList);
+	//ACTIVE BLOCK NODE
+	activeBlockEntity = entityManager->CreateEntity("Active_Block", "../../../../Assets/Sprites/Forest/active game block.png");
+	activeBlockNode->attachEntity(activeBlockEntity);
+	activeBlockNode->setNodeScale(0.4, 0.4);
 
 
 	//ADDING THE NODES TO THE ROOT NODE CHILD
@@ -215,10 +345,18 @@ void Scene::load()
 	rootNode->addChildNode(gameScoreHeaderNode);
 	rootNode->addChildNode(gameBoardNode);
 
+	//ADDING THE CONTAINER_NODES[CONTAINER_CELL] AS A CHILD OF THE ROOT NODE
 	for (int i = 0; i < containerList.size(); i++)
 	{
-		rootNode->addChildNode(containerList[i]);
+		gameBoardNode->addChildNode(containerList[i]);
 	}
+
+	//ADDING THE FRUIT_NODES AS A CHILD OF THE CONTAINER_NODES
+	for (int i = 0; i < fruitList.size(); i++)
+	{
+		containerList[i]->addChildNode(fruitList[i]);
+	}
+
 
 	rootNode->addChildNode(powerUpContainerNode);
 	rootNode->addChildNode(powerUpArrowContainerNode);
@@ -240,9 +378,16 @@ void Scene::update(sf::Time dt)
 }
 
 
-void Scene::handleEvent(sf::Event& event)
+void Scene::handleEvent(sf::RenderWindow& window,sf::Event& event)
 {
-
+	if (event.mouseButton.button == sf::Mouse::Left)
+	{
+		for (int i = 0; i < containerList.size(); i++)
+		{
+			//CHECK IF THE MOUSE CONTAINS INSIDE THE CONTAINER BLOCK
+			//IF EXIST SET A COMMAND TO BOTH RENDERER AND UPDATER TO UPDATE THE POSITION.
+		}
+	}
 }
 
 void Scene::unload()

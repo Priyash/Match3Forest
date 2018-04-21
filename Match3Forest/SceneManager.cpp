@@ -119,7 +119,7 @@ void SceneManager::play(sf::RenderWindow& stage)
 			while (stage.pollEvent(event))
 			{
 				if (!handle_global_event(event,stage)) {
-					scene->handleEvent(event);
+					scene->handleEvent(stage,event);
 				}
 			}
 

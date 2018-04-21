@@ -3,6 +3,7 @@
 
 void ForestNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states)const
 {
+	//UNTIL A COMMAND IS SET IT WONT DRAW THE ACTIVE BLOCK SPRITE
 	target.draw(entity->getSpriteInstance(), states);
 }
 
@@ -47,7 +48,7 @@ void ForestNode::updateCurrent(sf::Time dt)
 	//posx += speedX*dt.asSeconds();
 
 	//entity->getSpriteInstance().setPosition(posx, 400);
-
+	//UNTIL A COMMAND IS SET IT WONT UPDATE THE ACTIVE BLOCK SPRITE
 	if (entity->getName() == "Game_Cursor")
 	{
 		entity->getSpriteInstance().setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition()));
